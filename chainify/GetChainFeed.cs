@@ -20,19 +20,12 @@ namespace Chainify
 
             log.LogInformation($"Getting latest feed...");
 
-            var rawChainLinks = (await new TheChainUkClient().GetFeed()).ExtractTitlesAndDates();
+            var chainLinks = (await new TheChainUkClient().GetFeed())
+                .ExtractTitlesAndDates()
+                .Select(c => c.ToChainLink());
 
             log.LogInformation("Got latest feed");
             
-            var chainLinks = from chainLink in rawChainLinks
-                             select new ChainLink
-                             {
-                                 Position = int.Parse(chainLink.title.Split('.').First()),
-                                 Artist = chainLink.title.Split('.').Last().Split('\u2013').First().Trim(),
-                                 Track = chainLink.title.Split('.').Last().Split('\u2013').Last().Trim(),
-                                 PublishedDate = chainLink.pubDate,
-                                 RowKey = int.Parse(chainLink.pubDate.Split('.').First()).ToString(),
-                             };
             log.LogInformation("Updating data table...");
 
             await chainLinksCloudTable.CreateIfNotExistsAsync();
