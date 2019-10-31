@@ -11,16 +11,14 @@ namespace Chainify.Extensions
     {
         public static ChainLink ToChainLink(this (string title, string pubDate) rawChainLink)
         {
-            var artistRegex = new Regex(@"(?<=[0-9]{4}\. ).*(?= –)");
+            var artistRegex = new Regex(@"(?<=[0-9]{4}\. ).*");
 
-            var link = new ChainLink
-            {
-                Position = int.Parse(rawChainLink.title.Split('.').First()),
-                Artist = artistRegex.Match(rawChainLink.title).Value,
-                Track = rawChainLink.title.Split('\u2013').Last().Trim(),
-                PublishedDate = rawChainLink.pubDate,
-                RowKey = int.Parse(rawChainLink.title.Split('.').First()).ToString()
-            };
+            var link = new ChainLink();
+            link.Position = int.Parse(rawChainLink.title.Split('.').First());
+            link.Artist = artistRegex.Match(rawChainLink.title).Value.Split("–").First().Trim();
+            link.Track = rawChainLink.title.Replace($"{link.Position}. {link.Artist} – ", string.Empty).Trim();
+            link.PublishedDate = rawChainLink.pubDate;
+            link.RowKey = link.Position.ToString();
             return link;
         }
     }
