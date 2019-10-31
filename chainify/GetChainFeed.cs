@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Table;
 using Task = System.Threading.Tasks.Task;
 
-namespace chainify
+namespace Chainify
 {
     public static class GetChainFeed
     {
