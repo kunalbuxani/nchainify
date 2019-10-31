@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace chainify
+namespace Chainify
 {
     public class ChainLink : TableEntity
     {
@@ -13,5 +14,7 @@ namespace chainify
         {
             PartitionKey = "ChainLinks";
         }
+
+        public override string ToString() => $"{PartitionKey}|{RowKey}|{Position}|{Artist}|{Track}|{PublishedDate}";
     }
 }

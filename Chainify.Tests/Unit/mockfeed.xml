@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" 
+	xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" 
+	xmlns:atom="http://www.w3.org/2005/Atom" 
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" 
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/" 
+	xmlns:georss="http://www.georss.org/georss" 
+	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
+
+	<channel>
+		<title>The Chain</title>
+		<atom:link href="https://www.thechain.uk/feed/" rel="self" type="application/rss+xml" />
+		<link>https://www.thechain.uk</link>
+		<description>A searchable database for BBC Radio 6 Music - Radcliffe and Maconie&#039;s The Chain, officially the longest listener-generated thematically linked sequence of musically based items on the radio.</description>
+		<lastBuildDate>Sat, 26 Oct 2019 10:01:08 +0000</lastBuildDate>
+		<language>en-GB</language>
+		<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+		<sy:updateFrequency>
+	1	</sy:updateFrequency>
+
+		<site xmlns="com-wordpress:feed-additions:1">106866339</site>
+		<item>
+			<title>7981. Otis Redding &#8211; You Don&#8217;t Miss Your Water</title>
+			<link>https://www.thechain.uk/7981-otis-redding-you-dont-miss-your-water/</link>
+			<comments>https://www.thechain.uk/7981-otis-redding-you-dont-miss-your-water/#respond</comments>
+			<pubDate>Sat, 26 Oct 2019 08:23:52 +0000</pubDate>
+			<dc:creator><![CDATA[BBCRadMac]]></dc:creator>
+			<category><![CDATA[The Chain]]></category>
+			<category><![CDATA[Otis Redding]]></category>
+
+			<guid isPermaLink="false">https://www.thechain.uk/?p=17944</guid>
+			<description><![CDATA[A water link: Mr Big by Free was from their ‘Fire and Water’ album&#8230; &#160;]]></description>
+			<content:encoded><![CDATA[<p>A water link: Mr Big by Free was from their ‘Fire and Water’ album&#8230;</p>
+<p><iframe class='youtube-player' type='text/html' width='604' height='340' src='https://www.youtube.com/embed/3dHaMV_eXko?version=3&#038;rel=1&#038;fs=1&#038;autohide=2&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' allowfullscreen='true' style='border:0;'></iframe></p>
+<p>&nbsp;</p>
+]]>			</content:encoded>
+			<wfw:commentRss>https://www.thechain.uk/7981-otis-redding-you-dont-miss-your-water/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+			<post-id xmlns="com-wordpress:feed-additions:1">17944</post-id>
+		</item>
+		<item>
+			<title>7980. Free &#8211; Mr. Big</title>
+			<link>https://www.thechain.uk/7980-free-mr-big/</link>
+			<comments>https://www.thechain.uk/7980-free-mr-big/#respond</comments>
+			<pubDate>Sat, 26 Oct 2019 07:17:50 +0000</pubDate>
+			<dc:creator><![CDATA[BBCRadMac]]></dc:creator>
+			<category><![CDATA[The Chain]]></category>
+			<category><![CDATA[Free]]></category>
+
+			<guid isPermaLink="false">https://www.thechain.uk/?p=17942</guid>
+			<description><![CDATA[^ A Mr. link&#8230; &#160;]]></description>
+			<content:encoded><![CDATA[<p>^ A Mr. link&#8230;</p>
+<p><iframe class='youtube-player' type='text/html' width='604' height='340' src='https://www.youtube.com/embed/Ai-4zRRnD4k?version=3&#038;rel=1&#038;fs=1&#038;autohide=2&#038;showsearch=0&#038;showinfo=1&#038;iv_load_policy=1&#038;wmode=transparent' allowfullscreen='true' style='border:0;'></iframe></p>
+<p>&nbsp;</p>
+]]>			</content:encoded>
+			<wfw:commentRss>https://www.thechain.uk/7980-free-mr-big/feed/</wfw:commentRss>
+			<slash:comments>0</slash:comments>
+			<post-id xmlns="com-wordpress:feed-additions:1">17942</post-id>
+		</item>
+	</channel>
+</rss>

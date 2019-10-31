@@ -1,15 +1,12 @@
-using System;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Xml.Linq;
+using Chainify.Extensions;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Table;
+using System;
+using System.Linq;
 using Task = System.Threading.Tasks.Task;
 
-namespace chainify
+namespace Chainify
 {
     public static class GetChainFeed
     {
@@ -21,28 +18,21 @@ namespace chainify
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
-            var client = new HttpClient();
-            var chainRssFeed = await XDocument.LoadAsync(await client.GetStreamAsync("https://www.thechain.uk/feed/"), LoadOptions.None, CancellationToken.None);
-            var rawChainLinks = (from item in chainRssFeed.Descendants("item")
-                                 select new
-                                 {
-                                     PositionArtistTrack = item.Element("title")?.Value,
-                                     PublishedDate = item.Element("pubDate")?.Value
-                                 }).ToImmutableList();
+            log.LogInformation($"Getting latest feed...");
 
-            var chainLinks = from chainLink in rawChainLinks
-                             select new ChainLink
-                             {
-                                 Position = int.Parse(chainLink.PositionArtistTrack.Split('.').First()),
-                                 Artist = chainLink.PositionArtistTrack.Split('.').Last().Split('\u2013').First().Trim(),
-                                 Track = chainLink.PositionArtistTrack.Split('.').Last().Split('\u2013').Last().Trim(),
-                                 PublishedDate = chainLink.PublishedDate,
-                                 RowKey = int.Parse(chainLink.PositionArtistTrack.Split('.').First()).ToString(),
-                             };
+            var chainLinks = (await new TheChainUkClient().GetFeed())
+                .ExtractTitlesAndDates()
+                .Select(c => c.ToChainLink());
+
+            log.LogInformation("Got latest feed");
+            
+            log.LogInformation("Updating data table...");
 
             await chainLinksCloudTable.CreateIfNotExistsAsync();
 
             Task.WaitAll(chainLinks.Select(chainLink => chainLinksCloudTable.ExecuteAsync(TableOperation.InsertOrMerge(chainLink))).ToArray());
+
+            log.LogInformation("Updated data table.");
         }
     }
 }
