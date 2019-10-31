@@ -1,13 +1,9 @@
-using System;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Xml.Linq;
 using Chainify.Extensions;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Table;
+using System;
+using System.Linq;
 using Task = System.Threading.Tasks.Task;
 
 namespace Chainify
@@ -25,6 +21,8 @@ namespace Chainify
             log.LogInformation($"Getting latest feed...");
 
             var rawChainLinks = (await new TheChainUkClient().GetFeed()).ExtractTitlesAndDates();
+
+            log.LogInformation("Got latest feed");
             
             var chainLinks = from chainLink in rawChainLinks
                              select new ChainLink
@@ -35,10 +33,13 @@ namespace Chainify
                                  PublishedDate = chainLink.pubDate,
                                  RowKey = int.Parse(chainLink.pubDate.Split('.').First()).ToString(),
                              };
+            log.LogInformation("Updating data table...");
 
             await chainLinksCloudTable.CreateIfNotExistsAsync();
 
             Task.WaitAll(chainLinks.Select(chainLink => chainLinksCloudTable.ExecuteAsync(TableOperation.InsertOrMerge(chainLink))).ToArray());
+
+            log.LogInformation("Updated data table.");
         }
     }
 }
