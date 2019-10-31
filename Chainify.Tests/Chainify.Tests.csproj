@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -12,6 +12,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\chainify\Chainify.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Unit\mockfeed.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

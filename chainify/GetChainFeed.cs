@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Xml.Linq;
+using Chainify.Extensions;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -21,23 +22,18 @@ namespace Chainify
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
 
-            var client = new HttpClient();
-            var chainRssFeed = await XDocument.LoadAsync(await client.GetStreamAsync("https://www.thechain.uk/feed/"), LoadOptions.None, CancellationToken.None);
-            var rawChainLinks = (from item in chainRssFeed.Descendants("item")
-                                 select new
-                                 {
-                                     PositionArtistTrack = item.Element("title")?.Value,
-                                     PublishedDate = item.Element("pubDate")?.Value
-                                 }).ToImmutableList();
+            log.LogInformation($"Getting latest feed...");
 
+            var rawChainLinks = (await new TheChainUkClient().GetFeed()).ExtractTitlesAndDates();
+            
             var chainLinks = from chainLink in rawChainLinks
                              select new ChainLink
                              {
-                                 Position = int.Parse(chainLink.PositionArtistTrack.Split('.').First()),
-                                 Artist = chainLink.PositionArtistTrack.Split('.').Last().Split('\u2013').First().Trim(),
-                                 Track = chainLink.PositionArtistTrack.Split('.').Last().Split('\u2013').Last().Trim(),
-                                 PublishedDate = chainLink.PublishedDate,
-                                 RowKey = int.Parse(chainLink.PositionArtistTrack.Split('.').First()).ToString(),
+                                 Position = int.Parse(chainLink.title.Split('.').First()),
+                                 Artist = chainLink.title.Split('.').Last().Split('\u2013').First().Trim(),
+                                 Track = chainLink.title.Split('.').Last().Split('\u2013').Last().Trim(),
+                                 PublishedDate = chainLink.pubDate,
+                                 RowKey = int.Parse(chainLink.pubDate.Split('.').First()).ToString(),
                              };
 
             await chainLinksCloudTable.CreateIfNotExistsAsync();
