@@ -20,6 +20,7 @@ namespace Chainify.Tests.Unit
                 ("7981. Otis Redding – You Don’t Miss Your Water", "Sat, 26 Oct 2019 08:23:52 +0000"),
                 ("7980. Free – Mr. Big", "Sat, 26 Oct 2019 07:17:50 +0000"),
                 ("7979. Mr. Mister – Broken Wings", "Sat, 25 Oct 2019 07:17:50 +0000"),
+                ("7972. Earl King – Come On – Part I", "Sat, 24 Oct 2019 07:17:50 +0000")
             }.ToImmutableList();
 
             Assert.That(list.Select(r => r.ToChainLink()), Is.EquivalentTo(new List<ChainLink>
@@ -50,7 +51,16 @@ namespace Chainify.Tests.Unit
                     Position = 7979,
                     PartitionKey = "ChainLinks",
                     Track = "Broken Wings",
-                }
+                },
+                new ChainLink
+                {
+                    RowKey = "7972",
+                    PublishedDate = "Sat, 24 Oct 2019 07:17:50 +0000",
+                    Artist = "Earl King",
+                    Position = 7972,
+                    PartitionKey = "ChainLinks",
+                    Track = "Come On – Part I",
+                },
             })
                 .Using(new Func<ChainLink, ChainLink, bool>((actual, expected) =>
                   actual.RowKey == expected.RowKey && actual.PublishedDate == expected.PublishedDate && actual.Artist == expected.Artist &&
