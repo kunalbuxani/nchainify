@@ -1,6 +1,6 @@
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace Chainify
+namespace Chainify.Storage
 {
     public class ChainLink : TableEntity
     {

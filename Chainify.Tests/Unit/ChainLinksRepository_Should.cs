@@ -7,6 +7,7 @@ using Microsoft.WindowsAzure.Storage.Table;
 using Moq;
 using NUnit.Framework;
 using Chainify;
+using Chainify.Storage;
 
 namespace Chainify.Tests.Unit
 {

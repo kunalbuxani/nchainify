@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Chainify.Extensions;
+using Chainify.Storage;
 using NUnit.Framework;
 
 namespace Chainify.Tests.Unit

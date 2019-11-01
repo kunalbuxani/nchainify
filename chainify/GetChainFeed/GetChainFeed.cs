@@ -1,13 +1,14 @@
-using Chainify.Extensions;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using Chainify.Extensions;
+using Chainify.Storage;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Extensions.Logging;
+using Microsoft.WindowsAzure.Storage.Table;
 
-namespace Chainify
+namespace Chainify.GetChainFeed
 {
     public static class GetChainFeed
     {

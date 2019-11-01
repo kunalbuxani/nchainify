@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using Chainify;
+using Chainify.GetChainFeed;
 
 namespace Chainify.Tests.Integration
 {
