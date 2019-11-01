@@ -14,7 +14,7 @@ namespace Chainify.GetChainFeed
     {
         [FunctionName("GetChainFeed")]
         public static async Task Run(
-            [TimerTrigger("0 * * * * *")]TimerInfo myTimer,
+            [TimerTrigger("0 0 12 * * SUN")]TimerInfo myTimer,
             [Table("chainLinks", Connection = "AzureWebJobsStorage")] CloudTable chainLinksCloudTable,
             ILogger log)
         {
