@@ -3,8 +3,9 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
+using System.Collections.Immutable;
 using System.Linq;
-using Task = System.Threading.Tasks.Task;
+using System.Threading.Tasks;
 
 namespace Chainify
 {
@@ -28,9 +29,8 @@ namespace Chainify
             
             log.LogInformation("Updating data table...");
 
-            await chainLinksCloudTable.CreateIfNotExistsAsync();
-
-            Task.WaitAll(chainLinks.Select(chainLink => chainLinksCloudTable.ExecuteAsync(TableOperation.InsertOrMerge(chainLink))).ToArray());
+            var repo = new ChainLinkRepository(chainLinksCloudTable);
+            await repo.UpdateChainLinks(chainLinks.ToImmutableList());
 
             log.LogInformation("Updated data table.");
         }
