@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Chainify
+namespace Chainify.GetChainFeed
 {
     public class TheChainUkClient
     {
