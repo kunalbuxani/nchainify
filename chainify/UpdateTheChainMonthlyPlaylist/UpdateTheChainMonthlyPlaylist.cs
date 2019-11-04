@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Chainify.Extensions;
+﻿using Chainify.Extensions;
+using Chainify.Spotify;
 using Chainify.Storage;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Table;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using static System.Environment;
 
 namespace Chainify.UpdateTheChainMonthlyPlaylist
 {
@@ -24,14 +22,26 @@ namespace Chainify.UpdateTheChainMonthlyPlaylist
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
             log.LogInformation("Getting chain links...");
-            
+
             var lastMonthsChainLinks = (await new ChainLinkRepository(chainLinksCloudTable)
                 .GetAll())
                 .GetLastMonthsChainLinks(DateTime.Today);
-            
+
             log.LogInformation($"Got chain links {lastMonthsChainLinks.Min(l => l.Position)} to {lastMonthsChainLinks.Max(l => l.Position)}.");
 
+            var client = new SpotifyClient(
+                new SpotifyConfiguration(
+                    GetEnvironmentVariable("SpotifyClientId"),
+                    GetEnvironmentVariable("SpotifyClientSecret"),
+                    GetEnvironmentVariable("SpotifyRefreshToken")),
+                log);
 
+            await client.RefreshPlaylist(lastMonthsChainLinks,
+                new SpotifyPlaylist(
+                    new Uri(GetEnvironmentVariable("SpotifyPlaylistUri")),
+                    "The Chain Monthly", true, false,
+                    $"{DateTime.Today.AddMonths(-1):MMMM} in The Chain, BBC Radio 6's listener-generated playlist of thematically linked songs."
+                    ));
         }
     }
 }
