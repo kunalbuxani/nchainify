@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Chainify.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Moq;
 using NUnit.Framework;
-using Chainify;
-using Chainify.Storage;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Chainify.Tests.Unit
 {
