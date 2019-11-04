@@ -12,7 +12,7 @@ namespace Chainify.Tests.Unit
     public class ChainLinksRepositoryShould
     {
         [Test]
-        public async Task InsertOrMergeChainLinks()
+        public async Task InsertOrMerge_ChainLinks()
         {
             var chainLink1 = new ChainLink { RowKey = "1" };
             var chainLink2 = new ChainLink { RowKey = "2" };
