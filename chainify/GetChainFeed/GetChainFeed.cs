@@ -15,11 +15,11 @@ namespace Chainify.GetChainFeed
         [FunctionName("GetChainFeed")]
         public static async Task Run(
             [TimerTrigger("0 0 12 * * SUN")]TimerInfo myTimer,
+            //[TimerTrigger("0 * * * * *")]TimerInfo myTimer,
             [Table("chainLinks", Connection = "AzureWebJobsStorage")] CloudTable chainLinksCloudTable,
             ILogger log)
         {
             log.LogInformation($"C# Timer trigger function executed at: {DateTime.Now}");
-
             log.LogInformation($"Getting latest feed...");
 
             var chainLinks = (await new TheChainUkClient().GetFeed())
@@ -27,7 +27,6 @@ namespace Chainify.GetChainFeed
                 .Select(c => c.ToChainLink());
 
             log.LogInformation("Got latest feed");
-            
             log.LogInformation("Updating data table...");
 
             var repo = new ChainLinkRepository(chainLinksCloudTable);
