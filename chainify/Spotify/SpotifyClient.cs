@@ -99,7 +99,7 @@ namespace Chainify.Spotify
                     spotifyTrackIds.Add($"spotify:track:{firstResultTrackId}");
                 }
                 else
-                    _log.LogInformation($"Couldn't find {chainLink.Position} - {chainLink.Artist} - {chainLink.Track}");
+                    _log.LogWarning($"Couldn't find {chainLink.Position} - {chainLink.Artist} - {chainLink.Track}");
             }
 
             return spotifyTrackIds;
