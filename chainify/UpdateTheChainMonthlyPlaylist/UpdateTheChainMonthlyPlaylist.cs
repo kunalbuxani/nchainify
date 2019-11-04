@@ -17,7 +17,8 @@ namespace Chainify.UpdateTheChainMonthlyPlaylist
     {
         [FunctionName("UpdateTheChainMonthlyPlaylist")]
         public static async Task Run(
-                [TimerTrigger("0 * * * * *")] TimerInfo timer,
+                //[TimerTrigger("0 * * * * *")] TimerInfo timer,
+                [TimerTrigger("0 0 0 1 * *")] TimerInfo timer,
                 [Table("chainLinks", Connection = "AzureWebJobsStorage")] CloudTable chainLinksCloudTable,
                 ILogger log)
         {
