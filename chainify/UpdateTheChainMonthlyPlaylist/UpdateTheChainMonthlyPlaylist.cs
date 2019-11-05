@@ -40,7 +40,7 @@ namespace Chainify.UpdateTheChainMonthlyPlaylist
                 new SpotifyPlaylist(
                     new Uri(GetEnvironmentVariable("SpotifyPlaylistUri")),
                     "The Chain Monthly", true, false,
-                    $"{DateTime.Today.AddMonths(-1):MMMM} in The Chain, BBC Radio 6's listener-generated playlist of thematically linked songs."
+                    $"{DateTime.Today.AddMonths(-1):MMMM} in The Chain, BBC Radio 6's listener-generated playlist of thematically linked songs. Check https://www.thechain.uk/ for more."
                     ));
         }
     }
