@@ -44,7 +44,7 @@ are pulled from the [application settings for the function app](https://docs.mic
 | ------------------- | ------- |
 | SpotifyClientId     | The client ID issued by Spotify for the application |
 | SpotifyClientSecret | The secret key issued by Spotify for the application |
-| SpotifyRefreshToken | The refresh token issued by Spotify ID to obtain a temporary access token (see [Spotify Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow)) |
+| SpotifyRefreshToken | The refresh token issued by Spotify to obtain a temporary access token (see [Spotify Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow)) |
 | SpotifyPlaylistUri  | The API URI for the playlist to update |
 
 ## Example settings file
