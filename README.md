@@ -1,7 +1,7 @@
 # Chainify
 
 Chainify is a set of functions that publishes a monthly playlist of songs from
-[The Chain](https://www.thechain.uk/), a feature on the Radcliffe & Maconie show on BBC Radio 6. 
+[The Chain](https://www.thechain.uk/), a feature on the Radcliffe & Maconie show on BBC Radio 6, to a [Spotify playlist updated monthly](https://open.spotify.com/playlist/1wASzPsoJvtW3HrjMFsYBN). 
 Each song in the playlist is somehow linked - in either an obvious or obscure way - to the previous one.
 
 # Implementation
